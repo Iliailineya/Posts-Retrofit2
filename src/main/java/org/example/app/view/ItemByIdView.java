@@ -2,12 +2,12 @@ package org.example.app.view;
 
 import java.util.Scanner;
 
-public class UserByIdView {
+public class ItemByIdView {
 
     Scanner scanner = new Scanner(System.in);
 
     public String getData() {
-        System.out.print("Input User id: ");
+        System.out.print("Input id: ");
         return scanner.nextLine();
     }
 

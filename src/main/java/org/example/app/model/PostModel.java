@@ -1,45 +1,48 @@
 package org.example.app.model;
 
-import org.example.app.entity.PostResponse;
-import org.example.app.entity.PostsResponse;
+import org.example.app.entity.Post;
 import org.example.app.network.ApiClient;
 import org.example.app.network.ApiService;
-import retrofit2.Call;
 import retrofit2.Response;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.util.List;
+
+import static org.example.app.utils.Constants.POSTS_URL;
 
 public class PostModel {
-    // REST api/posts
-    public Optional<Response<PostsResponse>> getPosts() {
-
+    public List<Post> getAllPosts() {
         ApiClient client = new ApiClient();
-        ApiService service = client.getPostsApiService();
-        Call<PostsResponse> call = service.getPosts();
-        Optional<Response<PostsResponse>> optional;
+        ApiService apiService = client.getApiService(POSTS_URL);
 
         try {
-            optional = Optional.of(call.execute());
-        } catch (Exception ex) {
-            optional = Optional.empty();
+            Response<List<Post>> response = apiService.getPosts().execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                System.err.println("Request for all posts failed with code: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return optional;
+        return null;
     }
 
-    // REST api/posts/{id}
-    public Optional<Response<PostResponse>> getPostById(int id) {
+    public Post getPostById(int id) {
         ApiClient client = new ApiClient();
-        ApiService service = client.getPostsApiService();
-        Call<PostResponse> call = service.getPostById(id);
-        Optional<Response<PostResponse>> optional;
+        ApiService apiService = client.getApiService(POSTS_URL);
 
         try {
-            optional = Optional.of(call.execute());
-        } catch (Exception ex) {
-            optional = Optional.empty();
+            Response<Post> response = apiService.getPostById(id).execute();
+            if (response.isSuccessful()) {
+                return response.body();
+            } else {
+                System.err.println("Request for post ID " + id + " failed with code: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        return optional;
+        return null;
     }
 }
+

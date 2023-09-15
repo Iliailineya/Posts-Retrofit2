@@ -7,7 +7,7 @@ import org.example.app.entity.UserResponse;
 import org.example.app.model.UserModel;
 import org.example.app.utils.AppStarter;
 import org.example.app.utils.Constants;
-import org.example.app.view.UserByIdView;
+import org.example.app.view.ItemByIdView;
 import retrofit2.Response;
 
 import java.util.Optional;
@@ -15,9 +15,9 @@ import java.util.Optional;
 public class UserByIdController {
 
     UserModel model;
-    UserByIdView view;
+    ItemByIdView view;
 
-    public UserByIdController(UserModel model, UserByIdView view) {
+    public UserByIdController(UserModel model, ItemByIdView view) {
         this.model = model;
         this.view = view;
     }

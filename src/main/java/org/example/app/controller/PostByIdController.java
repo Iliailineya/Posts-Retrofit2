@@ -1,22 +1,17 @@
 package org.example.app.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.example.app.entity.Post;
-import org.example.app.entity.PostResponse;
 import org.example.app.model.PostModel;
 import org.example.app.utils.AppStarter;
 import org.example.app.utils.Constants;
-import org.example.app.view.PostByIdView;
-import retrofit2.Response;
-
-import java.util.Optional;
+import org.example.app.view.ItemByIdView;
 
 public class PostByIdController {
-    PostModel model;
-    PostByIdView view;
 
-    public PostByIdController(PostModel model, PostByIdView view) {
+    private final PostModel model;
+    private final ItemByIdView view;
+
+    public PostByIdController(PostModel model, ItemByIdView view) {
         this.model = model;
         this.view = view;
     }
@@ -28,17 +23,14 @@ public class PostByIdController {
         AppStarter.startApp();
     }
 
-    private String readPostById(int id) {
-        Optional<Response<PostResponse>> optional = model.getPostById(id);
-
-        if (optional.isEmpty()) {
+    public String readPostById(int id) {
+        Post post = model.getPostById(id);
+        if (post == null) {
             return Constants.NO_DATA_MSG;
         } else {
-            Gson gson = new Gson();
-            Post post = gson.fromJson(String.valueOf(optional.get().body()),
-                    new TypeToken<PostResponse>() {
-                    }.getType());
-            return post.toString();
+            return "Post ID: " + post.id() + "\n" +
+                    "Title: " + post.title() + "\n" + "Body: " + post.body() + "\n" +
+                    "UserId: " + post.userId() + "\n";
         }
     }
 }

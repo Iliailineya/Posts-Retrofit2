@@ -2,36 +2,39 @@ package org.example.app.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-public record Post(@SerializedName("userId") int userId, @SerializedName("id") int id,
-                   @SerializedName("title") String title, @SerializedName("body") String body) {
+public class Post {
 
-    @Override
-    public int userId() {
-        return userId;
+    @SerializedName("id")
+    private final int id;
+    @SerializedName("title")
+    private final String title;
+    @SerializedName("body")
+
+    private final String body;
+    @SerializedName("userId")
+
+    private final int userId;
+
+    public Post(int id, String title, String body, int userId) {
+        this.id = id;
+        this.title = title;
+        this.body = body;
+        this.userId = userId;
     }
 
-    @Override
     public int id() {
         return id;
     }
 
-    @Override
     public String title() {
         return title;
     }
 
-    @Override
     public String body() {
         return body;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "userId=" + userId +
-                ", id=" + id +
-                ", title='" + title + '\'' +
-                ", body='" + body + '\'' +
-                '}';
+    public int userId() {
+        return userId;
     }
 }

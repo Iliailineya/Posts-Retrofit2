@@ -7,7 +7,7 @@ import org.example.app.entity.UsersResponse;
 import org.example.app.model.UserModel;
 import org.example.app.utils.AppStarter;
 import org.example.app.utils.Constants;
-import org.example.app.view.UsersView;
+import org.example.app.view.ItemsView;
 import retrofit2.Response;
 
 import java.util.List;
@@ -17,9 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class UsersController {
 
     UserModel model;
-    UsersView view;
+    ItemsView view;
 
-    public UsersController(UserModel model, UsersView view) {
+    public UsersController(UserModel model, ItemsView view) {
         this.model = model;
         this.view = view;
     }

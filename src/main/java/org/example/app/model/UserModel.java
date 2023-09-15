@@ -9,13 +9,15 @@ import retrofit2.Response;
 
 import java.util.Optional;
 
+import static org.example.app.utils.Constants.USERS_URL;
+
 public class UserModel {
 
     // REST api/users
     public Optional<Response<UsersResponse>> fetchUsers() {
 
         ApiClient client = new ApiClient();
-        ApiService service = client.getUsersApiService();
+        ApiService service = client.getApiService(USERS_URL);
         Call<UsersResponse> call = service.getUsers();
         Optional<Response<UsersResponse>> optional;
 
@@ -31,7 +33,7 @@ public class UserModel {
     // REST api/users/{id}
     public Optional<Response<UserResponse>> fetchUserById(int id) {
         ApiClient client = new ApiClient();
-        ApiService service = client.getUsersApiService();
+        ApiService service = client.getApiService(USERS_URL);
         Call<UserResponse> call = service.getUserById(id);
         Optional<Response<UserResponse>> optional;
 

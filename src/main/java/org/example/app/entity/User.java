@@ -2,27 +2,36 @@ package org.example.app.entity;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
+public final class User {
+    @SerializedName("id")
+    private final int id;
+    @SerializedName("first_name")
+    private final String firstName;
+    @SerializedName("last_name")
+    private final String lastName;
+    @SerializedName("email")
+    private final String email;
 
-public record User(@SerializedName("id") int id, @SerializedName("first_name") String firstName,
-                   @SerializedName("last_name") String lastName, @SerializedName("email") String email) {
+    public User(int id, String firstName,
+                String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
 
-    @Override
     public int id() {
         return id;
     }
 
-    @Override
     public String firstName() {
         return firstName;
     }
 
-    @Override
     public String lastName() {
         return lastName;
     }
 
-    @Override
     public String email() {
         return email;
     }
@@ -35,17 +44,4 @@ public record User(@SerializedName("id") int id, @SerializedName("first_name") S
                 "\"last_name\":\"" + lastName + "\"," +
                 "\"email\":\"" + email + "\"}";
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == this) return true;
-        if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (User) obj;
-        return this.id == that.id &&
-                Objects.equals(this.firstName, that.firstName) &&
-                Objects.equals(this.lastName, that.lastName) &&
-                Objects.equals(this.email, that.email);
-    }
-
-
 }
